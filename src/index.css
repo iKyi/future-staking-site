@@ -1,0 +1,51 @@
+@font-face {
+  font-family: "Lato";
+  src: url("assets/fonts/lato/Lato-Light.ttf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("assets/fonts/lato/Lato-Regular.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("assets/fonts/lato/Lato-Semibold.ttf");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("assets/fonts/lato/Lato-Bold.ttf");
+  font-weight: "Bold";
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("assets/fonts/lato/Lato-Bold.ttf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("assets/fonts/lato/Lato-Bold.ttf");
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "MokotoMark2";
+  src: url("assets/fonts/mokoto/Mokoto Glitch Mark.ttf");
+}
+
+@font-face {
+  font-family: "Mokoto";
+  src: url("assets/fonts/mokoto/Mokoto Glitch Mark 2.ttf");
+}
+
+.respImg {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
