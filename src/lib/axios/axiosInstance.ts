@@ -10,11 +10,24 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
   function (response: any) {
     // ends here
+    // bind message to snackbar
+    const { message } = response;
+    if (message) {
+      store.dispatch(
+        newSnackbar({
+          id: `ApiCall${Math.random()}`,
+          content: message,
+          variant: "info",
+        })
+      );
+    }
+
     return response;
   },
   function (error) {
     // bind for error message snackbar
-    const errorMessage = error.response?.data?.message;
+    const errorMessage =
+      error.response?.data?.message ?? error?.message ?? null;
     if (errorMessage) {
       store.dispatch(
         newSnackbar({

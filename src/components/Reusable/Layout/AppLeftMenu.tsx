@@ -10,27 +10,27 @@ import DiamondIcon from "components/Icons/DiamondIcon";
 import HomeIcon from "components/Icons/HomeIcon";
 import JoystickIcon from "components/Icons/JoystickIcon";
 import PersonIcon from "components/Icons/PersonIcon";
-import usePageData from "hooks/usePageData";
-import { Fragment } from "react";
+import { StrapiContext } from "providers/StrapiPublicProvider";
+import { Fragment, useContext } from "react";
 import { centerFlex } from "utils/sxUtils";
 import { MenuItemEntryPropsType } from "./MenuItemEntry";
 
 export type AppLeftMenuPropsType = {};
 
 const AppLeftMenu: React.VFC<AppLeftMenuPropsType> = () => {
-  const { pageData } = usePageData("all-global");
+  const GlobalData = useContext(StrapiContext);
   const { landingMenuLink, gamesMenuLink, mintMenuLink, stakingMenuLink } =
-    pageData ?? {};
+    GlobalData ?? {};
 
   const LeftMenuItems: MenuItemEntryPropsType[] = [
     {
       icon: HomeIcon,
       url: landingMenuLink?.url ?? "/",
-      active: true,
       tooltip: landingMenuLink?.tooltipText ?? null,
       allDisabled: landingMenuLink?.allDisabled ?? false,
     },
     {
+      active: true,
       icon: PersonIcon,
       url: stakingMenuLink?.url ?? "/",
       tooltip: stakingMenuLink?.tooltipText ?? null,
@@ -51,7 +51,7 @@ const AppLeftMenu: React.VFC<AppLeftMenuPropsType> = () => {
   ];
 
   // *************** RENDER *************** //
-  if (!pageData) return null;
+  if (!GlobalData) return null;
   return (
     <Box>
       <List

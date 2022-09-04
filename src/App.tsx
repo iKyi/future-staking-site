@@ -6,11 +6,12 @@ import PageWithNavWrapper from "components/Reusable/Layout/PageWithNavWrapper";
 import { useContext, useEffect } from "react";
 import { StrapiContext } from "providers/StrapiPublicProvider";
 import SeoComp from "components/Reusable/Seo";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import MintLoginGuard from "components/MintLoginGuard/MintLoginGuard";
+import StakeCardEntry from "components/Stake/StakeCardEntry";
+import useStakeAction from "hooks/useStakeAction";
 
 const App: React.FC = () => {
-  const { publicKey } = useWallet();
   const { seo } = useContext(StrapiContext);
   const { pathname } = useLocation();
 
@@ -18,9 +19,14 @@ const App: React.FC = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [pathname]);
 
+  const { wallet, connected } = useWallet();
+  const { connection } = useConnection();
+  const { debouncedRefreshNfts } = useStakeAction();
+
   useEffect(() => {
-    console.log(publicKey?.toString());
-  }, [publicKey]);
+    debouncedRefreshNfts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [connection, wallet, connected]);
 
   return (
     <>
@@ -29,6 +35,7 @@ const App: React.FC = () => {
         <MintLoginGuard>
           <Routes>
             <Route element={<HomePage />} index />
+            <Route element={<StakeCardEntry />} path="/stake/:id" />
           </Routes>
         </MintLoginGuard>
       </PageWithNavWrapper>

@@ -43,10 +43,9 @@ const PublicHeader: React.VFC<PublicHeaderPropsType> = ({ children }) => {
   };
 
   const twitterUrl =
-    socialLinks.find((item: any) => item.name === "twitter")?.url ?? null;
+    socialLinks?.find((item: any) => item.name === "twitter")?.url ?? null;
   const discordUrl =
-    socialLinks.find((item: any) => item.name === "discord")?.url ?? null;
-
+    socialLinks?.find((item: any) => item.name === "discord")?.url ?? null;
   // *************** RENDER *************** //
   return (
     <>

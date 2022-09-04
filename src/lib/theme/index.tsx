@@ -9,6 +9,8 @@ import React, { createContext, ReactNode, useMemo, useState } from "react";
 import { PerseusColorsGetter } from "./pallette";
 import PrimaryFslButton from "assets/images/buttons/primary.png";
 import InfoFslButton from "assets/images/buttons/info.png";
+import lightBlueFslButton from "assets/images/buttons/lightBlue.png";
+import smallBlueButton from "assets/images/buttons/smallBlueButton.png";
 
 export enum FONTS {
   LATO = "Lato, sans-serif, Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
@@ -150,6 +152,42 @@ const getOverRides = (theme: Theme) => {
               },
             },
           },
+          {
+            props: { variant: "fsl", color: "secondary" },
+            style: {
+              padding: "20px 25px 20px 25px",
+              width: "240px",
+              maxWidth: "100%",
+              fontWeight: 400,
+              background: `url('${lightBlueFslButton}')`,
+              fontFamily: FONTS.MOKOTO,
+              color: "#fff",
+              backgroundSize: "100% 100%",
+              backgroundRepeat: "no-repeat",
+
+              "&:hover": {
+                color: "rgba(255, 182, 41, 1)",
+              },
+            },
+          },
+          {
+            props: { variant: "fsl", color: "secondary", size: "small" },
+            style: {
+              padding: "10px 25px 10px 25px",
+              maxWidth: "100%",
+              fontWeight: 400,
+              background: `url('${smallBlueButton}')`,
+              fontFamily: FONTS.MOKOTOONE,
+              color: "#fff",
+              backgroundSize: "100% 100%",
+              backgroundRepeat: "no-repeat",
+              width: "auto",
+              "&:hover": {
+                color: "rgba(255, 182, 41, 1)",
+              },
+            },
+          },
+
           // {
           //   props: { variant: "angled", color: "primary" },
           //   style: {

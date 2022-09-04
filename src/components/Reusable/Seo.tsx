@@ -20,12 +20,12 @@ const SeoComp: React.VFC<SeoPropsType> = ({ children, seo }) => {
     ...seoWithDefaults,
     // Add title suffix
     metaTitle:
-      seoWithDefaults.metaTitle && seoWithDefaults.metaTitle !== siteName
-        ? `${seoWithDefaults.metaTitle} | ${siteName}`
+      seoWithDefaults?.metaTitle && seoWithDefaults?.metaTitle !== siteName
+        ? `${seoWithDefaults?.metaTitle} | ${siteName}`
         : siteName,
     // Get full image URL
-    shareImage: seoWithDefaults.shareImage
-      ? getStrapiMedia(seoWithDefaults.shareImage)
+    shareImage: seoWithDefaults?.shareImage
+      ? getStrapiMedia(seoWithDefaults?.shareImage)
       : null,
   };
 

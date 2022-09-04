@@ -35,7 +35,7 @@ const MainWrapper = styled(Box)(({ theme }) => ({
   position: "relative",
   width: "100%",
   margin: "0 auto",
-  minHeight: "100%",
+  minHeight: `calc(100% - ${PublicHeaderHeight}px)`,
   display: "flex",
   maxWidth: GENERAL_SETTINGS.CONTENT_LIMITED_WIDTH,
   [theme.breakpoints.down("md")]: {

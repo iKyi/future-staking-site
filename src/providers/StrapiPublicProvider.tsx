@@ -20,9 +20,20 @@ const StrapiPublicProvider: React.VFC<StrapiPublicProviderPropsType> = ({
 
   useEffect(() => {
     if (!PublicSiteData) {
-      axiosGetter(getStrapiURL("landing-global?populate=*"))
-        .then((resp) => {
-          dispatch(setPublicSiteData(resp.data.attributes));
+      Promise.all([
+        axiosGetter(getStrapiURL("staking-page-data?populate=*")),
+        axiosGetter(getStrapiURL("all-global?populate=*")),
+      ])
+        .then((datas) => {
+          const localData = datas[0].data.attributes;
+          const globalData = datas[1].data.attributes;
+
+          dispatch(
+            setPublicSiteData({
+              ...localData,
+              ...globalData,
+            })
+          );
         })
         .catch((err) => {
           console.log(err);

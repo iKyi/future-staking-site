@@ -9,22 +9,25 @@ import { BrowserRouter } from "react-router-dom";
 import WalletProviderWrapper from "providers/WalletProvider";
 import StrapiPublicProvider from "providers/StrapiPublicProvider";
 import StoreProvider from "providers/StoreProvider";
+import AuthFSLClassWrapper from "providers/AuthFSLClassWrapper";
 
 ReactDOM.render(
   <React.StrictMode>
-    <PerseusThemeProvider>
-      <StoreProvider>
+    <StoreProvider>
+      <PerseusThemeProvider>
         <HelmetProvider>
           <StrapiPublicProvider>
             <WalletProviderWrapper>
-              <BrowserRouter>
-                <App />
-              </BrowserRouter>
+              <AuthFSLClassWrapper>
+                <BrowserRouter>
+                  <App />
+                </BrowserRouter>
+              </AuthFSLClassWrapper>
             </WalletProviderWrapper>
           </StrapiPublicProvider>
         </HelmetProvider>
-      </StoreProvider>
-    </PerseusThemeProvider>
+      </PerseusThemeProvider>
+    </StoreProvider>
   </React.StrictMode>,
   document.getElementById("root") as HTMLElement
 );
