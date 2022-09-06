@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import { useAppSelector } from "app/hooks";
+import ResponsiveSpace from "components/Reusable/ResponsiveSpace";
 import CardGrid from "components/Stake/CardGrid";
 import { getStrapiMedia } from "lib/theme/media";
 import StakingHomePageHeader from "./StakingHomePageHeader";
@@ -23,11 +24,21 @@ const StakingHomePage: React.FC<StakingHomePagePropsType> = ({ children }) => {
         backgroundSize: "cover",
         backgroundPosition: "center center",
         backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
         px: [2, 2, 4],
       }}
     >
-      <StakingHomePageHeader />
-      <CardGrid tokens={tokens} />
+      <Box
+        sx={{
+          width: 1480,
+          margin: "0 auto",
+          maxWidth: "100%",
+        }}
+      >
+        <StakingHomePageHeader />
+        <CardGrid tokens={tokens} />
+        <ResponsiveSpace />
+      </Box>
     </Box>
   );
 };
