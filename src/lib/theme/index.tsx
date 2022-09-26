@@ -6,7 +6,7 @@ import {
 } from "@mui/material";
 import { Theme, ThemeProvider } from "@mui/system";
 import React, { createContext, ReactNode, useMemo, useState } from "react";
-import { PerseusColorsGetter } from "./pallette";
+import { mainDarkBackground, PerseusColorsGetter } from "./pallette";
 import PrimaryFslButton from "assets/images/buttons/primary.png";
 import InfoFslButton from "assets/images/buttons/info.png";
 import lightBlueFslButton from "assets/images/buttons/lightBlue.png";
@@ -173,7 +173,7 @@ const getOverRides = (theme: Theme) => {
           {
             props: { variant: "fsl", color: "secondary", size: "small" },
             style: {
-              padding: "10px 25px 10px 25px",
+              padding: "17px 25px 17px 25px",
               maxWidth: "100%",
               fontWeight: 400,
               background: `url('${smallBlueButton}')`,
@@ -186,9 +186,7 @@ const getOverRides = (theme: Theme) => {
                 color: "rgba(255, 182, 41, 1)",
               },
             },
-          },
-
-          // {
+          }, // {
           //   props: { variant: "angled", color: "primary" },
           //   style: {
           //     paddingTop: theme.spacing(1.5),
@@ -222,9 +220,7 @@ const getOverRides = (theme: Theme) => {
             height: "100%",
             display: "flex",
             flexDirection: "column",
-            // background: `url(${MainBg}),linear-gradient(180deg, #023733 0%, #000C09 100%)`,
-            backgroundAttachment: "fixed",
-            backgroundPosition: "top center",
+            backgroundColor: mainDarkBackground,
           },
           html: {
             height: "100%",
@@ -269,32 +265,6 @@ const getOverRides = (theme: Theme) => {
           h6: {
             fontFamily: FONTS.LATO,
           },
-          // ".wallet-adapter-button.loginButtonSmall": {
-          //   background: `url('${RedSharp}')`,
-          //   backgroundSize: "100% 100%",
-          //   height: "24px",
-          //   padding: "0 15px 0px 10px",
-          // },
-          // ".wallet-adapter-button.loginButton": {
-          //   background: `url('${complexRed}')`,
-          //   backgroundSize: "100% 100%",
-          //   height: "60px",
-          //   padding: "0 30px",
-          // },
-          // ".wallet-adapter-button.logoutButton": {
-          //   background: `url('${RedSharp}')`,
-          //   backgroundSize: "100% 100%",
-          //   fontSize: "0.9rem",
-          //   height: "36px",
-          // },
-
-          // "@keyframes hackEffect": {
-          //   "0%": {
-          //     background: theme.palette.primary.main,
-          //     transform: "scale(0.9) rotate(45deg)",
-          //     boxShadow: `0px 0px 20px 3px ${theme.palette.error.main}`,
-          //   },
-          // },
         },
       },
       MuiTableCell: {

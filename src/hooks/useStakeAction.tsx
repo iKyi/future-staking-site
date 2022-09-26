@@ -217,36 +217,6 @@ const useStakeAction = () => {
     [publicKey]
   );
 
-  const claimSOL = useCallback(
-    async (mintId: string) => {
-      try {
-        dispatch(
-          addBlockingSnackbar({
-            id: "SOLClaimtransaction",
-            state: "loading",
-            text: "Processing transaction, please do not close this window ...",
-          })
-        );
-        await axiosInstance.put(
-          `${REST_ENDPOINTS.BASE}${REST_ENDPOINTS.CLAIM_SOL}/${publicKey}`,
-          {
-            mintID: mintId,
-          }
-        );
-        dispatch(removeBlockingSnackbar("SOLClaimtransaction"));
-        refreshNfts();
-      } catch (err) {
-        startSnackbar({
-          variant: "error",
-          content: `Transaction failed ! ${(err as any)?.message ?? err}`,
-          id: "claim-sol-error-" + Math.random(),
-        });
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [publicKey]
-  );
-
   const refreshBalance = useCallback(async () => {
     dispatch(setSolana(null));
     dispatch(setdataFSLBalance(null));
@@ -279,7 +249,6 @@ const useStakeAction = () => {
     refreshNfts,
     debouncedRefreshNfts,
     claimFSL,
-    claimSOL,
     refreshBalance,
     unstakeAction,
   };

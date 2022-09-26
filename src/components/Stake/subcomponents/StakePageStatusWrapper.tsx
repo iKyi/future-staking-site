@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import { Box, Stack, SxProps, Theme } from "@mui/material";
 import getMineSpeed from "utils/getMineSpeed";
 import ThunderBoltIcon from "components/Icons/ThunderBoltIcon";
+import smallBoxBackground from "./smallBoxBackground.png";
 
 const IconedValueBox: React.FC<{
   name: string;
@@ -22,16 +23,16 @@ const IconedValueBox: React.FC<{
     >
       <Box
         sx={{
-          border: "1px solid",
-          borderImageSlice: 1,
-          borderImageSource:
-            "linear-gradient(168.82deg, #FB37FF 1.7%, rgba(155, 111, 238, 0) 27.12%, rgba(123, 127, 234, 0) 61.28%, #1BB2DE 99.52%)",
-          backdropFilter: `blur(649.821px)`,
+          background: `url('${smallBoxBackground}')`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "100% 100%",
+          backgroundPosition: "center center",
           width: [40, 40, 70],
           height: [40, 40, 70],
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          p: "3px",
           mr: 2,
         }}
       >

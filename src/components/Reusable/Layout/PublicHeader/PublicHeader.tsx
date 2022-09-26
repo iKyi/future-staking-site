@@ -1,31 +1,33 @@
 import { MenuOpenOutlined } from "@mui/icons-material";
-import { Box, IconButton, styled } from "@mui/material";
-import LogoIcon from "components/Icons/LogoIcon";
+import {
+  Box,
+  IconButton,
+  useMediaQuery,
+  useTheme,
+  styled,
+} from "@mui/material";
 import SocialList from "components/Reusable/SocialList";
 import WalletLoginButtonTheme from "components/Reusable/WalletLoginButtonTheme";
 import { GENERAL_SETTINGS } from "constants/generalSettings";
 import useScrollPosition from "hooks/useScrollPosition";
-import { centerFlex } from "lib/sxUtils";
 import { StrapiContext } from "providers/StrapiPublicProvider";
 import { CSSProperties, useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { LeftNavDesktopWidth } from "../PageWithNavWrapper";
 import MobileMenu from "./MobileMenu";
-
-export const StyledLinkForHeaderLogo = styled(NavLink)(({ theme }) => ({
-  fontSize: "44px",
-  ...(centerFlex as CSSProperties),
-  color: theme.palette.primary.main,
-  "&:hover": {
-    color: theme.palette.error.main,
-  },
-  [theme.breakpoints.down("md")]: {
-    fontSize: "36px",
-  },
-}));
+import LogoIcon from "components/Icons/LogoIcon";
+import { NavLink } from "react-router-dom";
+import { centerFlex } from "utils/sxUtils";
 
 export type PublicHeaderPropsType = {
   children?: any;
 };
+
+const PublicHeaderLogoWrapper = styled(NavLink)(({ theme }) => ({
+  ...(centerFlex as CSSProperties),
+  [theme.breakpoints.down("md")]: {
+    fontSize: "36px",
+  },
+}));
 
 export const PublicHeaderHeight = 100;
 
@@ -33,7 +35,14 @@ const PublicHeader: React.VFC<PublicHeaderPropsType> = ({ children }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const scrollPosition = useScrollPosition();
   const isScrolledDown = scrollPosition > 10;
-  const { socialLinks } = useContext(StrapiContext);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const GlobalData = useContext(StrapiContext);
+  const { socialLinks } = GlobalData ?? {};
+  const twitterUrl =
+    socialLinks?.find((item: any) => item.name === "twitter")?.url ?? null;
+  const discordUrl =
+    socialLinks?.find((item: any) => item.name === "discord")?.url ?? null;
 
   const openMobileMenu = () => {
     setMobileOpen(true);
@@ -42,23 +51,18 @@ const PublicHeader: React.VFC<PublicHeaderPropsType> = ({ children }) => {
     setMobileOpen(false);
   };
 
-  const twitterUrl =
-    socialLinks?.find((item: any) => item.name === "twitter")?.url ?? null;
-  const discordUrl =
-    socialLinks?.find((item: any) => item.name === "discord")?.url ?? null;
   // *************** RENDER *************** //
   return (
     <>
       <Box
         component="header"
         sx={{
-          width: "100%",
-          bgcolor: !isScrolledDown
-            ? "background.default"
-            : "rgba(15, 15, 20, 0.8)",
-          position: "sticky",
+          bgcolor: !isScrolledDown ? "transparent" : "rgba(0, 5, 11, 0.8)",
+          position: "fixed",
           top: 0,
-          left: 0,
+          left: !isMobile ? `${LeftNavDesktopWidth}px` : 0,
+          right: 0,
+          width: !isMobile ? `calc(100% - ${LeftNavDesktopWidth}px)` : "100%",
           zIndex: (theme) => theme.zIndex.appBar,
           backdropFilter: "blur(2px)",
         }}
@@ -73,12 +77,23 @@ const PublicHeader: React.VFC<PublicHeaderPropsType> = ({ children }) => {
             alignItems: "center",
           }}
         >
-          <StyledLinkForHeaderLogo
-            to="/"
-            sx={{ fontSize: 65, textAlign: "center", px: [0, 0, 2] }}
-          >
-            <LogoIcon color="inherit" fontSize="inherit" />
-          </StyledLinkForHeaderLogo>
+          {isMobile && (
+            <PublicHeaderLogoWrapper
+              to="/"
+              sx={{
+                fontSize: 65,
+                textAlign: "center",
+                px: [0, 0, 2],
+              }}
+            >
+              <LogoIcon
+                key="logoIconPublicHeader"
+                color="inherit"
+                fontSize="inherit"
+              />
+            </PublicHeaderLogoWrapper>
+          )}
+
           <Box
             sx={{
               ml: "auto",
@@ -87,7 +102,11 @@ const PublicHeader: React.VFC<PublicHeaderPropsType> = ({ children }) => {
             }}
           >
             {children}
-            <SocialList discord={discordUrl} twitter={twitterUrl} />
+            <SocialList
+              sx={{ display: ["flex", "flex", "none"] }}
+              discord={discordUrl}
+              twitter={twitterUrl}
+            />
             <WalletLoginButtonTheme propStyles={{ margin: "0 10px 0 10px" }} />
             <IconButton
               sx={{

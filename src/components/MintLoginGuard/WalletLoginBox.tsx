@@ -4,6 +4,7 @@ import SectionHeader from "components/Reusable/SectionHeader";
 import WalletLoginButtonTheme from "components/Reusable/WalletLoginButtonTheme";
 import { centerFlex } from "lib/sxUtils";
 import { getStrapiMedia } from "lib/theme/media";
+import boxBg from "./boxBg.png";
 
 export type WalletLoginBoxPropsType = {
   children?: any;
@@ -29,10 +30,10 @@ const WalletLoginBox: React.FC<WalletLoginBoxPropsType> = ({ children }) => {
       <Box
         sx={{
           filter: `drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))`,
-          border: "1px solid",
-          borderImageSlice: 1,
-          borderImageSource:
-            "linear-gradient(123.49deg, #B048FD 8.63%, #6216D2 25.73%, #3E4ECC 42.83%, #3E75D5 62.96%)",
+          background: `url('${boxBg}')`,
+          backgroundSize: "100% 100%",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center center",
           minHeight: "25vh",
           width: "40vw",
           maxWidth: `calc(100% - 40px)`,

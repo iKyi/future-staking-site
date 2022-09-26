@@ -15,6 +15,8 @@ import { DateTime } from "luxon";
 import { FONTS } from "lib/theme";
 import StakePageStatusWrapper from "./subcomponents/StakePageStatusWrapper";
 import { getStrapiMedia } from "lib/theme/media";
+import ResponsiveSpace from "components/Reusable/ResponsiveSpace";
+import boxBackground from "./boxBackground.png";
 
 export type StakeCardEntryPropsType = {
   children?: any;
@@ -26,11 +28,10 @@ const boxStyles: SxProps = {
   flexDirection: "column",
   flex: 1,
   width: "100%",
-  border: "1px solid",
-  borderImageSlice: 1,
-  borderImageSource:
-    "linear-gradient(168.82deg, #FB37FF 1.7%, rgba(155, 111, 238, 0) 27.12%, rgba(123, 127, 234, 0) 61.28%, #1BB2DE 99.52%)",
-  backdropFilter: `blur(649.821px)`,
+  background: `url('${boxBackground}')`,
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "100% 100%",
+  backgroundPosition: "center center",
 };
 
 const parentBoxStyles: SxProps = {
@@ -68,7 +69,7 @@ const bigTextStyles: SxProps = {
 };
 
 const StakeCardEntry: React.VFC<StakeCardEntryPropsType> = ({ children }) => {
-  const { stakeAction, claimFSL, claimSOL, unstakeAction } = useStakeAction();
+  const { stakeAction, claimFSL, unstakeAction } = useStakeAction();
   const dispatch = useAppDispatch();
   const { id: paramId } = useParams();
   const charsLoading = useAppSelector((state) => state.global.loaders).includes(
@@ -137,22 +138,6 @@ const StakeCardEntry: React.VFC<StakeCardEntryPropsType> = ({ children }) => {
     }
   };
 
-  const localDoClaimSOL = () => {
-    if (solRedeemValue === 0) {
-      dispatch(setInfoModal("No SOL to claim"));
-    } else if (staked) {
-      claimSOL(mint ?? "");
-    } else {
-      dispatch(
-        setInfoModal(
-          <Box sx={{ color: "error.main" }}>
-            NFT needs to be staked in order to claim
-          </Box>
-        )
-      );
-    }
-  };
-
   const seo = data
     ? {
         metaTitle: `${name} NFT ${typeId ? "#" + typeId : ""}`,
@@ -179,6 +164,7 @@ const StakeCardEntry: React.VFC<StakeCardEntryPropsType> = ({ children }) => {
         backgroundRepeat: "repeat-y",
       }}
     >
+      <ResponsiveSpace />
       <SeoComp seo={seo} />
       <Box sx={{ mb: [3, 3, 5] }}>
         <Button
@@ -251,49 +237,6 @@ const StakeCardEntry: React.VFC<StakeCardEntryPropsType> = ({ children }) => {
                   rowSpacing={[2, 2, 0, 0]}
                   columnSpacing={[0, 0, 2, 2]}
                 >
-                  <Grid
-                    item
-                    xs={12}
-                    md={6}
-                    xl={4}
-                    sx={{ ...colmunFullHeightSize }}
-                  >
-                    <Box sx={parentBoxStyles}>
-                      <Box
-                        sx={{
-                          ...boxStyles,
-                        }}
-                      >
-                        <ElemTitle>Royalities</ElemTitle>
-                        <Box
-                          sx={{
-                            mb: [3, 3, 4],
-                          }}
-                        >
-                          <Typography
-                            component="span"
-                            sx={{ ...bigTextStyles }}
-                          >
-                            {solRedeemValue}
-                          </Typography>{" "}
-                          <Typography component="span">SOL</Typography>
-                        </Box>
-                        <Box sx={{ mt: "auto" }}>
-                          <Button
-                            fullWidth
-                            variant="fsl"
-                            color="info"
-                            onClick={localDoClaimSOL}
-                            sx={{
-                              width: "100%",
-                            }}
-                          >
-                            CLAIM NOW
-                          </Button>
-                        </Box>
-                      </Box>
-                    </Box>
-                  </Grid>
                   <Grid
                     item
                     xs={12}

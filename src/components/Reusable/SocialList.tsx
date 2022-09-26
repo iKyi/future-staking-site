@@ -11,15 +11,14 @@ const SocialIconButton: React.FC<{
       component={Link}
       href={url}
       sx={{
-        fontSize: "1.4rem",
-        width: 30,
-        height: 30,
+        fontSize: 12,
+        width: 22,
+        height: 22,
         color: "secondary.contrastText",
         borderRadius: 0,
         transition: "all .2s",
         border: "1px solid",
         backgroundColor: "colors.black",
-        padding: [1, 1, 2],
         transform: "rotate(45deg)",
         borderImageSlice: 1,
         borderImageSource:
@@ -73,8 +72,10 @@ const SocialList: React.VFC<SocialListPropsType> = ({
       direction="row"
       spacing={2.5}
       sx={{
-        mx: [1, 1, 2],
-        display: "inline-flex",
+        margin: "0 auto",
+        display: "flex",
+        justifyContent: "center",
+        px: 1,
         ...importedSx,
       }}
     >

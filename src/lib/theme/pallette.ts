@@ -1,5 +1,7 @@
 import { PaletteMode, ThemeOptions } from "@mui/material";
 
+export const mainDarkBackground = "#00050B";
+
 const getDesignTokens = (mode: PaletteMode) => ({
   palette: {
     mode,
@@ -27,7 +29,7 @@ const getDesignTokens = (mode: PaletteMode) => ({
             main: "#EB1545",
           },
           background: {
-            default: "rgba(15, 15, 20, 1)",
+            default: mainDarkBackground,
             paper: "rgba(9, 9, 9, 1)",
           },
           divider: "rgba(226,226,226,0.2)",
