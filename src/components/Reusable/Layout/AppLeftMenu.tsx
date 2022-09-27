@@ -50,7 +50,7 @@ const AppLeftMenu: React.VFC<AppLeftMenuPropsType> = () => {
     {
       icon: HomeIcon,
       url: landingMenuLink?.url ?? "/",
-      active: true,
+
       tooltip: landingMenuLink?.tooltipText ?? null,
       allDisabled: landingMenuLink?.allDisabled ?? false,
     },
@@ -62,6 +62,7 @@ const AppLeftMenu: React.VFC<AppLeftMenuPropsType> = () => {
     },
     {
       icon: StakingIcon,
+      active: true,
       url: stakingMenuLink?.url ?? "/",
       tooltip: stakingMenuLink?.tooltipText ?? null,
       allDisabled: stakingMenuLink?.allDisabled ?? false,
