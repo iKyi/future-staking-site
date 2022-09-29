@@ -10,6 +10,7 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import MintLoginGuard from "components/MintLoginGuard/MintLoginGuard";
 import StakeCardEntry from "components/Stake/StakeCardEntry";
 import useStakeAction from "hooks/useStakeAction";
+import FourOhFourComp from "components/FourOhFour/FourOhFourComp";
 
 const App: React.FC = () => {
   const { seo } = useContext(StrapiContext);
@@ -36,6 +37,7 @@ const App: React.FC = () => {
           <Routes>
             <Route element={<HomePage />} index />
             <Route element={<StakeCardEntry />} path="/stake/:id" />
+            <Route path="*" element={<FourOhFourComp />} />
           </Routes>
         </MintLoginGuard>
       </PageWithNavWrapper>
